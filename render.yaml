@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: doc-to-action
+    runtime: node
+    rootDir: .
+    buildCommand: |
+      cd client && npm install && npm run build && cd ..
+      cd server && npm install && npm run build && cd ..
+    startCommand: node server/dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+    healthCheckPath: /api/health
