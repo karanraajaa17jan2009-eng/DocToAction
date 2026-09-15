@@ -1,0 +1,17 @@
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = [
+  "npm install --prefix client --legacy-peer-deps",
+  "npm install --prefix server --legacy-peer-deps"
+]
+
+[phases.build]
+cmds = [
+  "npm run build --prefix client",
+  "npm run build --prefix server"
+]
+
+[start]
+cmd = "node server/dist/index.js"
